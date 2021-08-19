@@ -1,5 +1,7 @@
 #Getting pixels:
 
+Send ice as arugment to play ice breaker sudoku game
+
 ###1st possibility:
 run this command in a new tab in the IDE:
 `print selectRegion()`

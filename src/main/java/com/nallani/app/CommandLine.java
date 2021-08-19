@@ -9,7 +9,7 @@ public class CommandLine {
         Settings.InputFontMono = true;
         try {
             SudokuPlayer player = new SudokuPlayer();
-            player.autoplay();
+            player.autoplay(args);
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
             System.exit(1);

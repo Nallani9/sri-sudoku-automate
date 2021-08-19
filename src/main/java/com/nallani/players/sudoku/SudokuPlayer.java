@@ -20,19 +20,23 @@ public class SudokuPlayer {
      *
      * @throws InterruptedException if the thread is interrupted
      * @throws PlayException        if there's a problem while playing the game
+     * @param gameType
      */
 
-    public void autoplay() throws InterruptedException, PlayException {
+    public void autoplay(String[] gameType) throws InterruptedException, PlayException {
         SudokuWindow window = new SudokuWindow();
+        String game = gameType[0];
         window.undoBoard();
         window.moveMouse(1, 1);
         List<String> cards = scanNumbersOnScreen(window);
         System.out.println("the cards are  " + cards);
         SudokuInputConverter converter = new SudokuInputConverter();
         int[][] sudokuSolution = converter.converterToMatrixBoard(cards);
-        PlaySolution playSolution = new PlaySolution();
-        playSolution.playSolutions(sudokuSolution, window);
-        window.moveMouse(1, 1);
+        if(!game.equalsIgnoreCase("ice")) {
+            PlaySolution playSolution = new PlaySolution();
+            playSolution.playSolutions(sudokuSolution, window);
+            window.moveMouse(1, 1);
+        }
     }
 
     /**
