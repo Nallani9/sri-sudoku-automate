@@ -1,6 +1,5 @@
 package com.nallani.solvers.sudoku;
 
-import com.nallani.players.PlayException;
 import org.sikuli.script.Region;
 
 import java.util.ArrayList;

@@ -4,7 +4,6 @@ import com.nallani.players.MSCWindow;
 import com.nallani.players.PlayException;
 import org.sikuli.script.Region;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SudokuWindow extends MSCWindow {

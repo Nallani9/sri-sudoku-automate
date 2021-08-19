@@ -1,6 +1,10 @@
-#Getting pixels:
+#Sudoku Automation:
 
-Send ice as arugment to play ice breaker sudoku game
+Send `ice` as argument to play ice breaker sudoku game
+
+Send `irregular` as argument to play irregular sudoku game
+
+##Getting pixels:
 
 ###1st possibility:
 run this command in a new tab in the IDE:

@@ -18,21 +18,26 @@ public class SudokuPlayer {
      * Plays the currently displayed Microsoft Sudoku Game using SikuliX to automate
      * the actions and scan the board on the screen.
      *
+     * @param gameType
      * @throws InterruptedException if the thread is interrupted
      * @throws PlayException        if there's a problem while playing the game
-     * @param gameType
      */
 
     public void autoplay(String[] gameType) throws InterruptedException, PlayException {
         SudokuWindow window = new SudokuWindow();
         String game = gameType[0];
+        boolean isIrregular = false;
+
         window.undoBoard();
         window.moveMouse(1, 1);
         List<String> cards = scanNumbersOnScreen(window);
         System.out.println("the cards are  " + cards);
         SudokuInputConverter converter = new SudokuInputConverter();
-        int[][] sudokuSolution = converter.converterToMatrixBoard(cards);
-        if(!game.equalsIgnoreCase("ice")) {
+        if (game.equalsIgnoreCase("irregular")) {
+            isIrregular = true;
+        }
+        int[][] sudokuSolution = converter.converterToMatrixBoard(cards, isIrregular);
+        if (!game.equalsIgnoreCase("ice")) {
             PlaySolution playSolution = new PlaySolution();
             playSolution.playSolutions(sudokuSolution, window);
             window.moveMouse(1, 1);
