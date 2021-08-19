@@ -16,15 +16,15 @@ public class SudokuWindow extends MSCWindow {
      * Returns the number at the given index The code
      * might guess the wrong number or return "0" for unknown card.
      *
-     * @param deckIndex a card deck index from 0 to 81
+     * @param boardIndex a card deck index from 0 to 81
      * @return the card at the given index or "0" if unknown
      */
-    String numberAt(int deckIndex) {
-        return cardAt(regions.getTableau()[deckIndex]);
+    String numberAt(int boardIndex) {
+        return numAt(regionsModel.getTableau()[boardIndex]);
     }
 
     List<Region> cellAt(int deckIndex) {
-        return cellAt(regions.getTableau()[deckIndex]);
+        return cellAt(regionsModel.getTableau()[deckIndex]);
     }
 
     public void clickAtRegion(Region region) {
@@ -37,7 +37,7 @@ public class SudokuWindow extends MSCWindow {
         }
     }
 
-    List<Region> bottomCardAt(int deckIndex) {
-        return cellAt(regionStock.getStock()[deckIndex]);
+    List<Region> bottomNumAt(int boardIndex) {
+        return cellAt(regionStock.getStock()[boardIndex]);
     }
 }

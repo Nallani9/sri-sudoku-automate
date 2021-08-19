@@ -25,22 +25,30 @@ public class SudokuPlayer {
 
     public void autoplay(String[] gameType) throws InterruptedException, PlayException {
         SudokuWindow window = new SudokuWindow();
-        String game = gameType[0];
+        String game = null;
+        if (gameType.length != 0) {
+            game = gameType[0];
+        }
         boolean isIrregular = false;
 
-        window.undoBoard();
+        //window.undoBoard();
         window.moveMouse(1, 1);
+        window.clickTimeButton();
         List<String> cards = scanNumbersOnScreen(window);
         System.out.println("the cards are  " + cards);
         SudokuInputConverter converter = new SudokuInputConverter();
-        if (game.equalsIgnoreCase("irregular")) {
-            isIrregular = true;
-        }
-        int[][] sudokuSolution = converter.converterToMatrixBoard(cards, isIrregular);
-        if (!game.equalsIgnoreCase("ice")) {
-            PlaySolution playSolution = new PlaySolution();
-            playSolution.playSolutions(sudokuSolution, window);
-            window.moveMouse(1, 1);
+        if (game != null) {
+            if (game.equalsIgnoreCase("irregular")) {
+                isIrregular = true;
+            }
+            int[][] sudokuSolution = converter.converterToMatrixBoard(cards, isIrregular);
+            if (!game.equalsIgnoreCase("ice")) {
+                PlaySolution playSolution = new PlaySolution();
+                playSolution.playSolutions(sudokuSolution, window);
+                window.moveMouse(1, 1);
+            }
+        } else {
+            throw new PlayException("Argument cannot be null, please pass classic, irregular or ice");
         }
     }
 
@@ -52,11 +60,11 @@ public class SudokuPlayer {
      * @return a list of all the cards found on the screen
      */
     private List<String> scanNumbersOnScreen(SudokuWindow window) {
-        List<String> cards = new ArrayList<>();
+        List<String> numbers = new ArrayList<>();
         for (int i = 0; i < 81; i++) {
-            cards.add(window.numberAt(i));
+            numbers.add(window.numberAt(i));
         }
-        return cards;
+        return numbers;
     }
 
     public List<List<Region>> scanEmptyCellsOnScreen(SudokuWindow window) {
@@ -70,7 +78,7 @@ public class SudokuPlayer {
     public List<List<Region>> scanBottoNumbersOnScreen(SudokuWindow window) {
         List<List<Region>> cards = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
-            cards.add(window.bottomCardAt(i));
+            cards.add(window.bottomNumAt(i));
         }
         return cards;
     }

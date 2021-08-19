@@ -15,7 +15,7 @@ public class SudokuInputConverter {
                 count++;
             }
         }
-        BoardChallengeSolver solver = new BoardChallengeSolver();
-        return solver.solve(board, isIrregular);
+        BoardChallengeSolver boardChallengeSolver = new BoardChallengeSolver();
+        return boardChallengeSolver.solve(board, isIrregular);
     }
 }

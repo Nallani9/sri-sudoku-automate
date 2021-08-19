@@ -35,13 +35,13 @@ public abstract class MSCWindow {
      * Regions of the screen to interact with for searching for images and clicking. These are loaded from various
      * regions.json files in the resources directory.
      */
-    protected Regions regions;
+    protected RegionsModel regionsModel;
 
     /**
      * Regions of the screen to interact with for searching for images and clicking. These are loaded from
      * region2.json file in the resources directory.
      */
-    protected Regions regionStock;
+    protected RegionsModel regionStock;
     /**
      * An image to detect if the OK dialog popped up to confirm undoing the board.
      */
@@ -88,10 +88,10 @@ public abstract class MSCWindow {
         String gameResourceDir = gameName + "/";
         //Image gameImage = loadImage(gameResourceDir + "Game.png");
        /* if (appRegion().exists(gameImage, 2.0d) == null) {
-            throw new PlayException("Can't detect if we're playing a game of " + gameName + " Solitaire.");
+            throw new PlayException("Can't detect if we're playing a game of " + gameName + " Sudoku.");
         }*/
         rankImages = loadCharacterImages(gameResourceDir, "123456789");
-        regions = RegionDeserializer.createRegions(gameResourceDir + "regions.json");
+        regionsModel = RegionDeserializer.createRegions(gameResourceDir + "regions.json");
         regionStock = RegionDeserializer.createRegions(gameResourceDir + "region2.json");
     }
 
@@ -157,7 +157,7 @@ public abstract class MSCWindow {
      */
     public void clickTimeButton() throws InterruptedException, PlayException {
         clickImage(clickTime, 1.0d);
-        Thread.sleep(50);
+        Thread.sleep(500);
     }
 
     /**
@@ -203,7 +203,7 @@ public abstract class MSCWindow {
         if ((hwnd == null) || !showWindow(hwnd) || !moveWindow(hwnd) || !setForegroundWindow(hwnd)) {
             throw new PlayException("Unable to find, move, or show the Microsoft Sudoku window.");
         }
-        Thread.sleep(250);
+        Thread.sleep(100);
     }
 
     /**
@@ -212,7 +212,7 @@ public abstract class MSCWindow {
      * @param region the region containing the card rank and suit images (upper left corner)
      * @return a guess at what the card is at the region of the screen
      */
-    protected String cardAt(Region region) {
+    protected String numAt(Region region) {
         Character rank = bestCardCharacter(region, rankImages);
         //Character suit = bestCardCharacter(region, suitImages);
         if (rank != null) {
@@ -260,7 +260,7 @@ public abstract class MSCWindow {
         robot.mouseDown(InputEvent.BUTTON1_DOWN_MASK);
         robot.mouseUp(InputEvent.BUTTON1_DOWN_MASK);
         robot.waitForIdle();
-        Thread.sleep(100);
+        Thread.sleep(120);
     }
 
     /**

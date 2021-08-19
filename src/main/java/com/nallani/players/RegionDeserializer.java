@@ -21,12 +21,12 @@ public class RegionDeserializer extends StdDeserializer<Region> {
         super(vc);
     }
 
-    static Regions createRegions(String regionsJsonFilename) throws PlayException {
+    static RegionsModel createRegions(String regionsJsonFilename) throws PlayException {
         ObjectMapper mapper = new ObjectMapper();
         SimpleModule module = new SimpleModule().addDeserializer(Region.class, new RegionDeserializer(null));
         mapper.registerModule(module);
         try {
-            return mapper.readValue(ClassLoader.getSystemResource(regionsJsonFilename), Regions.class);
+            return mapper.readValue(ClassLoader.getSystemResource(regionsJsonFilename), RegionsModel.class);
         } catch (IOException ex) {
             throw new PlayException("Unable to load " + regionsJsonFilename, ex);
         }

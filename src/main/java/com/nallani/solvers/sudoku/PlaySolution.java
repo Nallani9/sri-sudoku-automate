@@ -30,7 +30,6 @@ public class PlaySolution {
                 // click bottom
                 clickBottom(bottomRegionList, indexToClick, window);
                 //click other place
-                window.clickTimeButton();
             }
         }
         System.out.println("successfully clicked upper cells");
@@ -49,11 +48,9 @@ public class PlaySolution {
     }
 
     private void clickBottom(List<List<Region>> bottomRegionList, int bottomValueIs, SudokuWindow window) {
-        System.out.println("Starting clicking bottom region");
         int indexToClick = bottomValueIs - 1;
         List<Region> regions = bottomRegionList.get(indexToClick);
         window.clickAtRegion(regions.get(0));
-        System.out.println("successfully clicked bottom region");
     }
 
     private int getIndexValue(int var1, int var2) {

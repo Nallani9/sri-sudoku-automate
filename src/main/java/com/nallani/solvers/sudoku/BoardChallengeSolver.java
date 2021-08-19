@@ -7,7 +7,6 @@ public class BoardChallengeSolver implements SudokuSolver {
     public int[][] solve(int[][] gridToSolve, boolean isIrregular) {
 
         SudokuImpl sudokuImpl = new SudokuImpl(gridToSolve);
-
         if (sudokuImpl.solve(isIrregular)) {
             System.out.println("Sudoku Grid solved with simple BT");
             sudokuImpl.display();

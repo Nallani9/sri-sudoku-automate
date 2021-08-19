@@ -7,7 +7,7 @@ import org.sikuli.script.Region;
  * We "hardcode" these into resources/.../regions.json files instead of just searching for images throughout the
  * window, to make it more accurate.
  */
-public class Regions {
+public class RegionsModel {
     private Region[] tableau;
     private Region[] stock;
 
