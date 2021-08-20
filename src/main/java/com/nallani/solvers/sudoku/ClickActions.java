@@ -10,7 +10,6 @@ public class ClickActions {
     public List<Region> getRegionForEmptyCell(Region region) {
         List<Region> lr = new ArrayList<>();
         lr.add(region);
-        System.out.println(lr);
         return lr;
     }
 

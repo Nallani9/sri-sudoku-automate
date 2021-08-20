@@ -157,7 +157,7 @@ public abstract class MSCWindow {
      */
     public void clickTimeButton() throws InterruptedException, PlayException {
         clickImage(clickTime, 1.0d);
-        Thread.sleep(500);
+        //Thread.sleep(500);
     }
 
     /**
@@ -203,7 +203,7 @@ public abstract class MSCWindow {
         if ((hwnd == null) || !showWindow(hwnd) || !moveWindow(hwnd) || !setForegroundWindow(hwnd)) {
             throw new PlayException("Unable to find, move, or show the Microsoft Sudoku window.");
         }
-        Thread.sleep(100);
+        Thread.sleep(50);
     }
 
     /**
@@ -217,8 +217,8 @@ public abstract class MSCWindow {
         if (rank != null) {
             return rank.toString();
         }
-        ClickActions clickActions = new ClickActions();
-        clickActions.getRegionForEmptyCell(region);
+        //ClickActions clickActions = new ClickActions();
+        //clickActions.getRegionForEmptyCell(region);
         return "0";
     }
 
@@ -259,7 +259,7 @@ public abstract class MSCWindow {
         robot.mouseDown(InputEvent.BUTTON1_DOWN_MASK);
         robot.mouseUp(InputEvent.BUTTON1_DOWN_MASK);
         robot.waitForIdle();
-        Thread.sleep(120);
+        Thread.sleep(50);
     }
 
     /**
