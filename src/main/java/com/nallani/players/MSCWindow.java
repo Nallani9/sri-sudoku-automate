@@ -207,14 +207,13 @@ public abstract class MSCWindow {
     }
 
     /**
-     * Guesses the card at the given region.  It may be wrong and it may return "??" to represent an unknown card.
+     * Guesses the number at the given region.  It may be wrong and it may return "??" to represent an unknown number.
      *
-     * @param region the region containing the card rank and suit images (upper left corner)
-     * @return a guess at what the card is at the region of the screen
+     * @param region the region containing the number rank and suit images (upper left corner)
+     * @return a guess at what the number is at the region of the screen
      */
     protected String numAt(Region region) {
-        Character rank = bestCardCharacter(region, rankImages);
-        //Character suit = bestCardCharacter(region, suitImages);
+        Character rank = bestnumberCharacter(region, rankImages);
         if (rank != null) {
             return rank.toString();
         }
@@ -224,7 +223,7 @@ public abstract class MSCWindow {
     }
 
     protected List<Region> cellAt(Region region) {
-        Character rank = bestCardCharacter(region, rankImages);
+        Character rank = bestnumberCharacter(region, rankImages);
         if (rank == null) {
             ClickActions clickActions = new ClickActions();
             return clickActions.getRegionForEmptyCell(region);
@@ -306,9 +305,9 @@ public abstract class MSCWindow {
     }
 
     /**
-     * Returns the best card rank / suit character for the card in the given region.
+     * Returns the best number rank / suit character for the number in the given region.
      */
-    private Character bestCardCharacter(Region region, Map<Image, Character> imageToCharacter) {
+    private Character bestnumberCharacter(Region region, Map<Image, Character> imageToCharacter) {
         Match match = region.findBest(imageToCharacter.keySet().toArray());
         if (match == null) {
             return null;
@@ -318,7 +317,7 @@ public abstract class MSCWindow {
 
     /**
      * Returns a list of all the files in the src/main/resources/[game]/[resolution]/[rank or suit] directory.
-     * These are image files of the card rank or suit, used for guessing what cards are face up on the game window.
+     * These are image files of the number rank or suit, used for guessing what numbers are face up on the game window.
      */
     private java.util.List<String> characterImageFilenames(String resourceDir, char c) throws PlayException {
         String imageDirectory = resourceDir + c + "/";
@@ -335,9 +334,9 @@ public abstract class MSCWindow {
                 }
             }
         } catch (URISyntaxException ex) {
-            throw new PlayException("Unable to find resource directory for card-related character " + c, ex);
+            throw new PlayException("Unable to find resource directory for number-related character " + c, ex);
         } catch (IOException ex) {
-            throw new PlayException("Unable to find image files for the card-related character " + c, ex);
+            throw new PlayException("Unable to find image files for the number-related character " + c, ex);
         }
     }
 

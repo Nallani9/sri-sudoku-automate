@@ -56,7 +56,6 @@ public class SudokuImpl {
     }
 
     // Solve method. We will use a recursive BackTracking algorithm.
-    // we will see better approaches in next video :)
     public boolean solve(boolean isIrregular) {
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {

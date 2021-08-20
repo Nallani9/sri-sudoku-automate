@@ -34,14 +34,14 @@ public class SudokuPlayer {
         //window.undoBoard();
         window.moveMouse(1, 1);
         window.clickTimeButton();
-        List<String> cards = scanNumbersOnScreen(window);
-        System.out.println("the cards are  " + cards);
+        List<String> numbers = scanNumbersOnScreen(window);
+        System.out.println("the numbers are  " + numbers);
         SudokuInputConverter converter = new SudokuInputConverter();
         if (game != null) {
             if (game.equalsIgnoreCase("irregular")) {
                 isIrregular = true;
             }
-            int[][] sudokuSolution = converter.converterToMatrixBoard(cards, isIrregular);
+            int[][] sudokuSolution = converter.converterToMatrixBoard(numbers, isIrregular);
             if (!game.equalsIgnoreCase("ice")) {
                 PlaySolution playSolution = new PlaySolution();
                 playSolution.playSolutions(sudokuSolution, window);
@@ -75,7 +75,7 @@ public class SudokuPlayer {
         return cells;
     }
 
-    public List<List<Region>> scanBottoNumbersOnScreen(SudokuWindow window) {
+    public List<List<Region>> scanBottomNumbersOnScreen(SudokuWindow window) {
         List<List<Region>> cards = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
             cards.add(window.bottomNumAt(i));

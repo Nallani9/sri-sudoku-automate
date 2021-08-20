@@ -18,7 +18,7 @@ public class PlaySolution {
         SOLVED_GAME = solution;
         SudokuPlayer sudokuPlayer = new SudokuPlayer();
         List<List<Region>> topRegionList = sudokuPlayer.scanEmptyCellsOnScreen(window);
-        List<List<Region>> bottomRegionList = sudokuPlayer.scanBottoNumbersOnScreen(window);
+        List<List<Region>> bottomRegionList = sudokuPlayer.scanBottomNumbersOnScreen(window);
 
         //top: click first cell
         System.out.println("clicking main board");

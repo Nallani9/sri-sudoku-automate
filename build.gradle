@@ -22,7 +22,7 @@ test {
 }
 
 applicationDefaultJvmArgs = ["-Xmx8G", "-XX:+UseG1GC", "-XX:MaxGCPauseMillis=5000"]
-mainClassName = 'com.nallani.CommandLine'
+mainClassName = 'com.nallani.app.CommandLine'
 
 jar {
     manifest {

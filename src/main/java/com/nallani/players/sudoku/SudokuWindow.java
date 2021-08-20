@@ -14,10 +14,10 @@ public class SudokuWindow extends MSCWindow {
 
     /**
      * Returns the number at the given index The code
-     * might guess the wrong number or return "0" for unknown card.
+     * might guess the wrong number or return "0" for unknown number.
      *
      * @param boardIndex a card deck index from 0 to 81
-     * @return the card at the given index or "0" if unknown
+     * @return the number at the given index or "0" if unknown
      */
     String numberAt(int boardIndex) {
         return numAt(regionsModel.getTableau()[boardIndex]);
