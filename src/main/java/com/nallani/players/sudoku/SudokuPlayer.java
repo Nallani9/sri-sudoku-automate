@@ -7,7 +7,9 @@ import org.sikuli.script.Image;
 import org.sikuli.script.Region;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collector;
 
 public class SudokuPlayer {
 
@@ -48,14 +50,18 @@ public class SudokuPlayer {
             if (!game.equalsIgnoreCase("ice")) {
                 PlaySolution playSolution = new PlaySolution();
                 playSolution.playSolutions(sudokuSolution, window);
-                Thread.sleep(13000);
+                Thread.sleep(15000);
                 Image playAgainImage = window.loadImage("common/" + "PlayAgain.png");
-                if (window.appRegion().exists(playAgainImage, 2.0d) != null) {
-                    Thread.sleep(7000);
+                if (window.appRegion().exists(playAgainImage, 2.0d) == null) {
+                    List<String> scanSecondTime = scanNumbersOnScreen(window);
+                    SudokuInputConverter secondConverter = new SudokuInputConverter();
+                    secondConverter.converterToMatrixBoard(scanSecondTime,false);
+                    playSolution.playSolutions(sudokuSolution, window);
                     //throw new PlayException("Can't detect play again button.");
                 }
+                Thread.sleep(15000);
                 if (window.appRegion().exists(playAgainImage, 2.0d) == null) {
-                    for (int u = 0; u < 60; u++) {
+                    for (int u = 0; u < 70; u++) {
                         window.clickAtRegion(Region.create(881, 713, 133, 63));
                     }
                 }

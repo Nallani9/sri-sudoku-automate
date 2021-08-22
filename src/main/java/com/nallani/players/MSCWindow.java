@@ -102,11 +102,13 @@ public abstract class MSCWindow {
         String gameResourceDir = gameName + "/";
         Image gameImage = loadImage(gameResourceDir + "Game.png");
         if (appRegion().exists(gameImage, 2.0d) == null) {
-            Thread.sleep(10000);
+            Thread.sleep(2000);
             //throw new PlayException("Can't detect if we're playing a game of " + gameName + " Sudoku.");
+        }else if(appRegion().exists(gameImage, 2.0d) == null){
+            Thread.sleep(13000);
         }
         if (appRegion().exists(gameImage, 2.0d) == null) {
-            Thread.sleep(25000);
+            Thread.sleep(30000);
             //throw new PlayException("Can't detect if we're playing a game of " + gameName + " Sudoku.");
         }
         rankImages = loadCharacterImages(gameResourceDir, "123456789");
