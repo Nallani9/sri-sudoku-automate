@@ -1,8 +1,9 @@
 package com.nallani.players.sudoku;
 
-import com.nallani.players.PlayException;
+import com.nallani.exceptions.PlayException;
 import com.nallani.solvers.sudoku.PlaySolution;
 import com.nallani.solvers.sudoku.SudokuInputConverter;
+import org.sikuli.script.Image;
 import org.sikuli.script.Region;
 
 import java.util.ArrayList;
@@ -25,15 +26,17 @@ public class SudokuPlayer {
 
     public void autoplay(String[] gameType) throws InterruptedException, PlayException {
         SudokuWindow window = new SudokuWindow();
+        window.moveMouse(1, 1);
         String game = null;
         if (gameType.length != 0) {
             game = gameType[0];
         }
         boolean isIrregular = false;
-
-        //window.undoBoard();
-        window.moveMouse(1, 1);
-        window.clickTimeButton();
+        /*Image playHint = window.loadImage("common/" + "Hint.png");
+        if (window.appRegion().exists(playHint, 2.0d) == null) {
+            throw new PlayException("Can't detect hint button button.");
+        }*/
+        window.clickHint();
         List<String> numbers = scanNumbersOnScreen(window);
         System.out.println("the numbers are  " + numbers);
         SudokuInputConverter converter = new SudokuInputConverter();
@@ -45,8 +48,21 @@ public class SudokuPlayer {
             if (!game.equalsIgnoreCase("ice")) {
                 PlaySolution playSolution = new PlaySolution();
                 playSolution.playSolutions(sudokuSolution, window);
-                window.moveMouse(1, 1);
+                Thread.sleep(13000);
+                Image playAgainImage = window.loadImage("common/" + "PlayAgain.png");
+                if (window.appRegion().exists(playAgainImage, 2.0d) != null) {
+                    Thread.sleep(7000);
+                    //throw new PlayException("Can't detect play again button.");
+                }
+                if (window.appRegion().exists(playAgainImage, 2.0d) == null) {
+                    for (int u = 0; u < 60; u++) {
+                        window.clickAtRegion(Region.create(881, 713, 133, 63));
+                    }
+                }
+                window.clickTimeButton();
+                window.clickPlayAgain();
             }
+            window.moveMouse(1, 1);
         } else {
             throw new PlayException("Argument cannot be null, please pass classic, irregular or ice");
         }

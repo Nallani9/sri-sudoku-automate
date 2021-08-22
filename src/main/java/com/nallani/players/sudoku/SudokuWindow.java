@@ -1,7 +1,7 @@
 package com.nallani.players.sudoku;
 
+import com.nallani.exceptions.PlayException;
 import com.nallani.players.MSCWindow;
-import com.nallani.players.PlayException;
 import org.sikuli.script.Region;
 
 import java.util.List;

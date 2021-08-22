@@ -1,6 +1,6 @@
 package com.nallani.solvers.sudoku;
 
-import com.nallani.players.PlayException;
+import com.nallani.exceptions.PlayException;
 import com.nallani.players.sudoku.SudokuPlayer;
 import com.nallani.players.sudoku.SudokuWindow;
 import org.sikuli.script.Region;
@@ -11,7 +11,7 @@ import static com.nallani.solvers.sudoku.SudokuInputConverter.board;
 
 public class PlaySolution {
 
-    public static int[][] SOLVED_GAME = new int[9][9];
+    public int[][] SOLVED_GAME = new int[9][9];
 
     public void playSolutions(int[][] solution, SudokuWindow window) throws PlayException, InterruptedException {
 

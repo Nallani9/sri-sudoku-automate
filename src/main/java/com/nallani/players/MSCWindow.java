@@ -1,5 +1,6 @@
 package com.nallani.players;
 
+import com.nallani.exceptions.PlayException;
 import com.nallani.solvers.sudoku.ClickActions;
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;
@@ -53,6 +54,19 @@ public abstract class MSCWindow {
     private Image clickTime = loadImage("common/Time.png");
 
     /**
+     * The location of the done on Board.
+     */
+    private Image clickDone = loadImage("common/Done.png");
+    /**
+     * The location of the playagain on Board.
+     */
+    private Image clickPlayAgain = loadImage("common/PlayAgain.png");
+    /**
+     * The location of the hint on Board.
+     */
+    private Image clickHint = loadImage("common/Hint.png");
+
+    /**
      * The location of the Undo Board buttons.
      */
     private Image undoBoardImage = loadImage("common/UndoBoard.png");
@@ -86,10 +100,15 @@ public abstract class MSCWindow {
         Settings.InputFontSize = 14;
         okDialogImage = loadImage("common/OKDialog.png");
         String gameResourceDir = gameName + "/";
-        //Image gameImage = loadImage(gameResourceDir + "Game.png");
-       /* if (appRegion().exists(gameImage, 2.0d) == null) {
-            throw new PlayException("Can't detect if we're playing a game of " + gameName + " Sudoku.");
-        }*/
+        Image gameImage = loadImage(gameResourceDir + "Game.png");
+        if (appRegion().exists(gameImage, 2.0d) == null) {
+            Thread.sleep(10000);
+            //throw new PlayException("Can't detect if we're playing a game of " + gameName + " Sudoku.");
+        }
+        if (appRegion().exists(gameImage, 2.0d) == null) {
+            Thread.sleep(25000);
+            //throw new PlayException("Can't detect if we're playing a game of " + gameName + " Sudoku.");
+        }
         rankImages = loadCharacterImages(gameResourceDir, "123456789");
         regionsModel = RegionDeserializer.createRegions(gameResourceDir + "regions.json");
         regionStock = RegionDeserializer.createRegions(gameResourceDir + "region2.json");
@@ -146,7 +165,7 @@ public abstract class MSCWindow {
         if (appRegion().exists(okDialogImage, 3.0d) != null) {
             clickRegion(okButton);
         }
-        Thread.sleep(3000);
+        //Thread.sleep(3000);
     }
 
     /**
@@ -157,7 +176,36 @@ public abstract class MSCWindow {
      */
     public void clickTimeButton() throws InterruptedException, PlayException {
         clickImage(clickTime, 1.0d);
-        //Thread.sleep(500);
+    }
+
+    /**
+     * Resets the cell to the beginning.
+     *
+     * @throws InterruptedException if the thread is interrupted
+     * @throws PlayException        if there's a problem clicking on the time
+     */
+    public void clickHint() throws InterruptedException, PlayException {
+        clickImage(clickHint, 1.0d);
+    }
+
+    /**
+     * Resets the cell to the beginning.
+     *
+     * @throws InterruptedException if the thread is interrupted
+     * @throws PlayException        if there's a problem clicking on the time
+     */
+    public void clickDone() throws InterruptedException, PlayException {
+        clickImage(clickDone, 1.0d);
+    }
+
+    /**
+     * Resets the cell to the beginning.
+     *
+     * @throws InterruptedException if the thread is interrupted
+     * @throws PlayException        if there's a problem clicking on the time
+     */
+    public void clickPlayAgain() throws InterruptedException, PlayException {
+        clickImage(clickPlayAgain, 1.0d);
     }
 
     /**
@@ -238,7 +286,7 @@ public abstract class MSCWindow {
      * @param filename the path within the src/main/resources directory for the image file to load
      * @return an Image from the file
      */
-    protected Image loadImage(String filename) {
+    public Image loadImage(String filename) {
         return Image.create(ClassLoader.getSystemResource(filename));
     }
 
@@ -299,7 +347,7 @@ public abstract class MSCWindow {
     /**
      * Return the SikuliX region representing the Microsoft Solitaire Collection window location.
      */
-    protected Region appRegion() throws InterruptedException, PlayException {
+    public Region appRegion() throws InterruptedException, PlayException {
         positionForPlay();
         return App.focusedWindow();
     }
